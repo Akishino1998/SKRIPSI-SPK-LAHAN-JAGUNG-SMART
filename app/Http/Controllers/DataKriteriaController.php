@@ -6,6 +6,7 @@ use App\Http\Requests\CreateDataKriteriaRequest;
 use App\Http\Requests\UpdateDataKriteriaRequest;
 use App\Repositories\DataKriteriaRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Kriteria;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
@@ -31,7 +32,7 @@ class DataKriteriaController extends AppBaseController
     {
         $dataKriterias = $this->dataKriteriaRepository->all();
 
-        return view('data_kriterias.index')
+        return view('master.data_kriterias.index')
             ->with('dataKriterias', $dataKriterias);
     }
 
@@ -42,7 +43,8 @@ class DataKriteriaController extends AppBaseController
      */
     public function create()
     {
-        return view('data_kriterias.create');
+        $kriteria = Kriteria::pluck('kriteria','id');
+        return view('master.data_kriterias.create',compact('kriteria'));
     }
 
     /**
@@ -60,7 +62,7 @@ class DataKriteriaController extends AppBaseController
 
         Flash::success('Data Kriteria saved successfully.');
 
-        return redirect(route('dataKriterias.index'));
+        return redirect(route('master.dataKriterias.index'));
     }
 
     /**
@@ -77,10 +79,10 @@ class DataKriteriaController extends AppBaseController
         if (empty($dataKriteria)) {
             Flash::error('Data Kriteria not found');
 
-            return redirect(route('dataKriterias.index'));
+            return redirect(route('master.dataKriterias.index'));
         }
 
-        return view('data_kriterias.show')->with('dataKriteria', $dataKriteria);
+        return view('master.data_kriterias.show')->with('dataKriteria', $dataKriteria);
     }
 
     /**
@@ -93,14 +95,15 @@ class DataKriteriaController extends AppBaseController
     public function edit($id)
     {
         $dataKriteria = $this->dataKriteriaRepository->find($id);
+        $kriteria = Kriteria::pluck('kriteria','id');
 
         if (empty($dataKriteria)) {
             Flash::error('Data Kriteria not found');
 
-            return redirect(route('dataKriterias.index'));
+            return redirect(route('master.dataKriterias.index'));
         }
 
-        return view('data_kriterias.edit')->with('dataKriteria', $dataKriteria);
+        return view('master.data_kriterias.edit',compact('kriteria'))->with('dataKriteria', $dataKriteria);
     }
 
     /**
@@ -118,14 +121,14 @@ class DataKriteriaController extends AppBaseController
         if (empty($dataKriteria)) {
             Flash::error('Data Kriteria not found');
 
-            return redirect(route('dataKriterias.index'));
+            return redirect(route('master.dataKriterias.index'));
         }
 
         $dataKriteria = $this->dataKriteriaRepository->update($request->all(), $id);
 
         Flash::success('Data Kriteria updated successfully.');
 
-        return redirect(route('dataKriterias.index'));
+        return redirect(route('master.dataKriterias.index'));
     }
 
     /**
@@ -144,13 +147,13 @@ class DataKriteriaController extends AppBaseController
         if (empty($dataKriteria)) {
             Flash::error('Data Kriteria not found');
 
-            return redirect(route('dataKriterias.index'));
+            return redirect(route('master.dataKriterias.index'));
         }
 
         $this->dataKriteriaRepository->delete($id);
 
         Flash::success('Data Kriteria deleted successfully.');
 
-        return redirect(route('dataKriterias.index'));
+        return redirect(route('master.dataKriterias.index'));
     }
 }

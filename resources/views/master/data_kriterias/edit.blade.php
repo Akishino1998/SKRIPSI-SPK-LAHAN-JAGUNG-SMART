@@ -1,37 +1,21 @@
-@extends('layouts.app')
-
-@section('content')
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-12">
-                    <h1>Edit Data Kriteria</h1>
-                </div>
-            </div>
-        </div>
-    </section>
-
+@extends('layouts.master')
+@section('konten')
     <div class="content px-3">
-
         @include('adminlte-templates::common.errors')
-
         <div class="card">
-
-            {!! Form::model($dataKriteria, ['route' => ['dataKriterias.update', $dataKriteria->id], 'method' => 'patch']) !!}
-
+            {!! Form::model($dataKriteria, ['route' => ['master.dataKriterias.update', $dataKriteria->id], 'method' => 'patch']) !!}
             <div class="card-body">
                 <div class="row">
-                    @include('data_kriterias.fields')
+                    <h5 class="m-0">Edit Data Kriteria </h5>
+                    @include('master.data_kriterias.fields')
                 </div>
             </div>
-
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('dataKriterias.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('master.dataKriterias.index') }}" class="btn btn-default">Kembali</a>
             </div>
-
             {!! Form::close() !!}
-
         </div>
     </div>
 @endsection
+

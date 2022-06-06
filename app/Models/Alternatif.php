@@ -7,21 +7,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class Kriteria
+ * Class Alternatif
  * @package App\Models
- * @version May 30, 2022, 7:50 pm UTC
+ * @version June 1, 2022, 7:53 am UTC
  *
- * @property varchar $kriteria
- * @property varchar $bobot
- * @property varchar $normalisasi
+ * @property int $id_lokasi
+ * @property varchar $nama_lahan
  */
-class Kriteria extends Model
+class Alternatif extends Model
 {
     use SoftDeletes;
 
     use HasFactory;
 
-    public $table = 'kriteria';
+    public $table = 'alternatif';
     
 
     protected $dates = ['deleted_at'];
@@ -29,10 +28,9 @@ class Kriteria extends Model
 
 
     public $fillable = [
-        'kriteria',
-        'bobot',
-        'normalisasi',
-        'kode'
+        'id_admin',
+        'id_lokasi',
+        'nama_lahan'
     ];
 
     /**
@@ -50,14 +48,17 @@ class Kriteria extends Model
      * @var array
      */
     public static $rules = [
-        'kriteria' => 'required',
-        'bobot' => 'required',
-        'normalisasi' => 'required'
+        'id_lokasi' => 'required',
+        'nama_lahan' => 'required'
     ];
  
-    public function DataKriteria()
+    public function Lokasi()
     {
-        return $this->hasMany(DataKriteria::class, 'id_kriteria', 'id');
+        return $this->belongsTo(RefLokasi::class, 'id_lokasi', 'id');
     }
-    
+  
+    public function NilaiAlternatif()
+    {
+        return $this->hasMany(NilaiAlternatif::class, 'id_alternatif', 'id');
+    }
 }

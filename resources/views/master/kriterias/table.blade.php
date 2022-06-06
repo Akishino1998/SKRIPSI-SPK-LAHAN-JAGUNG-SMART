@@ -1,28 +1,28 @@
 <div class="table-responsive">
     <table class="table" id="kriterias-table">
         <thead>
-        <tr>
-            <th>Kriteria</th>
-        <th>Bobot</th>
-        <th>Normalisasi</th>
-            <th colspan="3">Action</th>
-        </tr>
+            <tr>
+                <th  style="text-align: center">Kode</th>
+                <th  style="text-align: center">Kriteria</th>
+                <th  style="text-align: center">Bobot</th>
+                <th  style="text-align: center">Normalisasi</th>
+                <th  style="text-align: center" colspan="3">Action</th>
+            </tr>
         </thead>
         <tbody>
         @foreach($kriterias as $kriteria)
             <tr>
-                <td>{{ $kriteria->kriteria }}</td>
-            <td>{{ $kriteria->bobot }}</td>
-            <td>{{ $kriteria->normalisasi }}</td>
+                <td style="text-align: center">{{ $kriteria->kode }}</td>
+                <td style="text-align: center">{{ $kriteria->kriteria }}</td>
+                <td style="text-align: center">{{ $kriteria->bobot }}</td>
+                <td style="text-align: center">{{ $kriteria->normalisasi }}</td>
                 <td width="120">
-                    {!! Form::open(['route' => ['kriterias.destroy', $kriteria->id], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['master.kriterias.destroy', $kriteria->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('kriterias.show', [$kriteria->id]) }}"
-                           class='btn btn-default btn-xs'>
+                        <a href="{{ route('master.kriterias.show', [$kriteria->id]) }}" class='btn btn-info btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('kriterias.edit', [$kriteria->id]) }}"
-                           class='btn btn-default btn-xs'>
+                        <a href="{{ route('master.kriterias.edit', [$kriteria->id]) }}" class='btn btn-primary btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>
                         {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}

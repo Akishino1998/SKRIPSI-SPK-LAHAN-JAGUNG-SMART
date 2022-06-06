@@ -26,9 +26,12 @@ Route::controller(OrderController::class)->middleware(['auth'])->group(function 
         Route::resource('kriterias', App\Http\Controllers\KriteriaController::class);
         Route::resource('refLokasis', App\Http\Controllers\RefLokasiController::class);
         Route::resource('dataKriterias', App\Http\Controllers\DataKriteriaController::class);
+        Route::resource('alternatifs', App\Http\Controllers\AlternatifController::class);
     });
 });
 
 require __DIR__.'/auth.php';
+
+
 
 

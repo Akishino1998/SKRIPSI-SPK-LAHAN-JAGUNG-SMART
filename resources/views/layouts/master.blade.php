@@ -29,8 +29,8 @@
             <a class="navbar-brand m-0" href="#"  style="display: flex;">
                 <img src="{{ asset('assets/img/logo-ct.png') }}" class="navbar-brand-img h-100 mt-1" alt="main_logo">
                 <div style="display:inline-block;">
-                    <span class="ms-1">Hi, Eko</span><br>
-                    <span class="ms-1 font-weight-bold">PT. Yugo Putra Sejahtera</span>
+                    <span class="ms-1">Hi, {{ Auth::user()->name }}</span><br>
+                    <span class="ms-1 font-weight-bold">Aplikasi SPK Lahan Jagung</span>
                 </div>
             </a>
         </div>
@@ -65,6 +65,18 @@
                     <a class="nav-link" href="{{ route('master.kriterias.index') }}">
                         <i class="fa-solid fa-table icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"></i>
                         <span class="nav-link-text ms-1">Kriteria</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('master.dataKriterias.index') }}">
+                        <i class="fa-solid fa-table icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"></i>
+                        <span class="nav-link-text ms-1">Detail Kriteria</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('master.alternatifs.index') }}">
+                        <i class="fa-solid fa-table icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"></i>
+                        <span class="nav-link-text ms-1">Alternatif</span>
                     </a>
                 </li>
                 <li class="nav-item">

@@ -1,41 +1,21 @@
-@extends('layouts.app')
-
-@section('content')
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Kriterias</h1>
-                </div>
-                <div class="col-sm-6">
-                    <a class="btn btn-primary float-right"
-                       href="{{ route('kriterias.create') }}">
-                        Add New
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="content px-3">
-
-        @include('flash::message')
-
+@extends('layouts.master')
+@section('konten')
+    <div class="col-sm-6">
         <div class="clearfix"></div>
-
         <div class="card">
-            <div class="card-body p-0">
-                @include('kriterias.table')
-
-                <div class="card-footer clearfix">
-                    <div class="float-right">
-                        
-                    </div>
+            <div class="card-header">
+                <div class="header-top">
+                    <h5 class="m-0">Data Kriteria 
+                        <a class="btn btn-primary" style="float: right" href="{{ route('master.kriterias.create') }}">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Tambah Baru
+                        </a>       
+                    </h5>
                 </div>
             </div>
-
+            <div class="card-body">
+                @include('flash::message')
+                @include('master.kriterias.table')
+            </div>
         </div>
     </div>
-
 @endsection
-
