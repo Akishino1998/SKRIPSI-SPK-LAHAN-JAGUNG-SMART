@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="row">
                     <h5 class="m-0">Edit Data Alternatif </h5>
-                    @include('alternatifs.fields')
+                    @include('alternatifs.fieldsEdit')
                 </div>
             </div>
             <div class="card-footer">

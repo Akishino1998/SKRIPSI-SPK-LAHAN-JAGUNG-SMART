@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,8 @@ Route::controller(OrderController::class)->middleware(['auth'])->group(function 
         Route::resource('refLokasis', App\Http\Controllers\RefLokasiController::class);
         Route::resource('dataKriterias', App\Http\Controllers\DataKriteriaController::class);
         Route::resource('alternatifs', App\Http\Controllers\AlternatifController::class);
+        Route::get('/hasil',[AlternatifController::class,'hasil'])->name('hasil');
+
     });
 });
 

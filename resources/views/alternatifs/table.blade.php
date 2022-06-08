@@ -35,4 +35,9 @@
             @endforeach
         </tbody>
     </table>
+    @if (COUNT($alternatifs)==0)
+        <div class="alert alert-warning" role="alert">
+            Tidak Ada Data
+        </div>
+    @endif
 </div>

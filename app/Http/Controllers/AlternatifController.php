@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateAlternatifRequest;
 use App\Repositories\AlternatifRepository;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Alternatif;
+use App\Models\DataKriteria;
 use App\Models\Kriteria;
 use App\Models\NilaiAlternatif;
 use App\Models\RefLokasi;
@@ -70,14 +71,32 @@ class AlternatifController extends AppBaseController
         $alternatif->id_admin = Auth::user()->id;
         $alternatif->save();
         foreach($request->kriteria as $key => $value){
+            $dataKriteria = DataKriteria::all()->where('id_kriteria', $key);
+            $cmin = $dataKriteria->min('bobot');
+            $cmax = $dataKriteria->max('bobot');
+            $cout = $value;
+            $kriteria = Kriteria::find($key);
+            $normalisasi = $kriteria->normalisasi;
+            
             $nilaiAlternatif = new NilaiAlternatif;
             $nilaiAlternatif->nilai = $value; 
             $nilaiAlternatif->id_kriteria = $key; 
             $nilaiAlternatif->id_alternatif = $alternatif->id; 
+            $nilaiAlternatif->nilai_utility = 100*($cout-$cmin)/($cmax-$cmin);
+            $nilaiAlternatif->normalisasi =  $nilaiAlternatif->nilai_utility*$normalisasi;
             $nilaiAlternatif->save();
-        }
 
-        Flash::success('Alternatif saved successfully.');
+        }
+        $nilaiAlternatif = NilaiAlternatif::all()->where('id_alternatif',$alternatif->id);
+        $hasilAkhir = 0;
+        foreach($nilaiAlternatif as $item){
+            $hasilAkhir+=$item->normalisasi;
+        }
+        $alternatif = Alternatif::find($alternatif->id);
+        $alternatif->hasil_perhitungan = $hasilAkhir;
+        $alternatif->save();
+
+        Flash::success('Alternatif berhasil disimpan!.');
 
         return redirect(route('master.alternatifs.index'));
     }
@@ -112,14 +131,15 @@ class AlternatifController extends AppBaseController
     public function edit($id)
     {
         $alternatif = $this->alternatifRepository->find($id);
-
+        $lokasi = RefLokasi::pluck('lokasi','id');
+        $kriteria = $alternatif->NilaiAlternatif;
         if (empty($alternatif)) {
             Flash::error('Alternatif not found');
 
             return redirect(route('master.alternatifs.index'));
         }
 
-        return view('alternatifs.edit')->with('alternatif', $alternatif);
+        return view('alternatifs.edit',compact('lokasi','kriteria'))->with('alternatif', $alternatif);
     }
 
     /**
@@ -132,17 +152,44 @@ class AlternatifController extends AppBaseController
      */
     public function update($id, UpdateAlternatifRequest $request)
     {
-        $alternatif = $this->alternatifRepository->find($id);
+        $alternatif = Alternatif::find($id);
+        $alternatif->id_lokasi = $request->id_lokasi;
+        $alternatif->nama_lahan = $request->nama_lahan;
+        $alternatif->id_admin = Auth::user()->id;
+        $alternatif->save();
+        foreach($request->kriteria as $key => $value){
+            // return $key;
+            $nilaiAlternatif = NilaiAlternatif::find($key);
+            $dataKriteria = DataKriteria::all()->where('id_kriteria', $nilaiAlternatif->id_kriteria);
+            $cmin = $dataKriteria->min('bobot');
+            $cmax = $dataKriteria->max('bobot');
+            $cout = $value;
+            $kriteria = Kriteria::find( $nilaiAlternatif->id_kriteria);
+            $normalisasi = $kriteria->normalisasi;
+            
+            $nilaiAlternatif->nilai = $value; 
+            $nilaiAlternatif->nilai_utility = 100*($cout-$cmin)/($cmax-$cmin);
+            $nilaiAlternatif->normalisasi =  $nilaiAlternatif->nilai_utility*$normalisasi;
+            $nilaiAlternatif->save();
+        }
+        $nilaiAlternatif = NilaiAlternatif::all()->where('id_alternatif',$alternatif->id);
+        $hasilAkhir = 0;
+        foreach($nilaiAlternatif as $item){
+            $hasilAkhir+=$item->normalisasi;
+        }
+        $alternatif = Alternatif::find($alternatif->id);
+        $alternatif->hasil_perhitungan = $hasilAkhir;
+        $alternatif->save();
 
         if (empty($alternatif)) {
-            Flash::error('Alternatif not found');
+            Flash::error('Alternatif tidak ditemukan.');
 
             return redirect(route('master.alternatifs.index'));
         }
 
         $alternatif = $this->alternatifRepository->update($request->all(), $id);
 
-        Flash::success('Alternatif updated successfully.');
+        Flash::success('Alternatif berhasil diedit!.');
 
         return redirect(route('master.alternatifs.index'));
     }
@@ -161,15 +208,22 @@ class AlternatifController extends AppBaseController
         $alternatif = $this->alternatifRepository->find($id);
 
         if (empty($alternatif)) {
-            Flash::error('Alternatif not found');
+            Flash::error('Alternatif tidak ditemukan.');
 
             return redirect(route('master.alternatifs.index'));
         }
 
         $this->alternatifRepository->delete($id);
 
-        Flash::success('Alternatif deleted successfully.');
+        Flash::success('Alternatif berhasil dihapus.');
 
         return redirect(route('master.alternatifs.index'));
+    }
+
+    function hasil(){
+        $alternatifs = $this->alternatifRepository->all();
+        $kriteria = Kriteria::all();
+        return view('hasil',compact('kriteria'))
+            ->with('alternatifs', $alternatifs);
     }
 }

@@ -3695,20 +3695,20 @@ fieldset:disabled .btn {
 }
 
 .btn-info {
-  color: #000;
+  color: rgb(255, 255, 255);
   background-color: #17c1e8;
   border-color: #17c1e8;
 }
 
 .btn-info:hover {
-  color: #000;
+  color: rgb(255, 255, 255);
   background-color: #3acaeb;
   border-color: #2ec7ea;
 }
 
 .btn-check:focus+.btn-info,
 .btn-info:focus {
-  color: #000;
+  color: rgb(255, 255, 255);
   background-color: #3acaeb;
   border-color: #2ec7ea;
   box-shadow: 0 0 0 0.2rem rgba(20, 164, 197, 0.5);
@@ -3719,7 +3719,7 @@ fieldset:disabled .btn {
 .btn-info:active,
 .btn-info.active,
 .show>.btn-info.dropdown-toggle {
-  color: #000;
+  color: rgb(255, 255, 255);
   background-color: #45cded;
   border-color: #2ec7ea;
 }
@@ -5867,8 +5867,8 @@ fieldset:disabled .btn {
 
 .alert-warning {
   color: #645314;
-  background-color: #fef5d6;
-  border-color: #fef1c2;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
 }
 
 .alert-warning .alert-link {
@@ -18637,15 +18637,15 @@ fieldset:disabled .btn {
 
 */
 .alert-primary {
-  background-image: linear-gradient(310deg, #7928CA 0%, #d6006c 100%);
+  background-color: #cce5ff;
 }
 
 .alert-secondary {
-  background-image: linear-gradient(310deg, #627594 0%, #8ca1cb 100%);
+  background-color: #e2e3e5;
 }
 
 .alert-success {
-  background-image: linear-gradient(310deg, #17ad37 0%, #84dc14 100%);
+  background-color: #d4edda;
 }
 
 .alert-info {
@@ -18653,15 +18653,15 @@ fieldset:disabled .btn {
 }
 
 .alert-warning {
-  background-image: linear-gradient(310deg, #f53939 0%, #fac60b 100%);
+  background-color: #fff3cd;
 }
 
 .alert-danger {
-  background-image: linear-gradient(310deg, #ea0606 0%, #ff3d59 100%);
+  background-color: #f8d7da;
 }
 
 .alert-light {
-  background-image: linear-gradient(310deg, #CED4DA 0%, #d1dae6 100%);
+  background-color: #fefefe;
 }
 
 .alert-dark {
@@ -19291,12 +19291,12 @@ fieldset:disabled .btn {
 
 .btn-info,
 .btn.bg-gradient-info {
-  color: #fff;
+  color: white;
 }
 
 .btn-info:hover,
 .btn.bg-gradient-info:hover {
-  color: #fff;
+  color: white;
 }
 
 .btn-success,
@@ -21625,6 +21625,8 @@ hr.horizontal.gray-light {
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
   background-image: linear-gradient(310deg, #cb0c9f 0%, #cb0c9f 100%);
+  color: white;
+  
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon svg .color-background,

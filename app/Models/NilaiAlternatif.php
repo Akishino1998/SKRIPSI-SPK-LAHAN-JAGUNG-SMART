@@ -12,5 +12,10 @@ class NilaiAlternatif extends Model
     use SoftDeletes;
     public $table = 'nilai_alternatif';
     protected $dates = ['deleted_at'];
+  
+    public function Kriteria()
+    {
+        return $this->belongsTo(Kriteria::class, 'id_kriteria', 'id');
+    }
 
 }
