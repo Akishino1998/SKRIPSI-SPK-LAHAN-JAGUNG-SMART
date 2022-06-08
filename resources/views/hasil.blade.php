@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('konten')
-    <div class="col-sm-12">
+    {{-- <div class="col-sm-12">
         <div class="clearfix"></div>
         <div class="card">
             <div class="card-header">
@@ -19,7 +19,6 @@
                                 <th colspan="4">Nilai Utility</th>
                                 <th colspan="4">Normalisasi</th>
                                 <th rowspan="2">Hasil Akhir</th>
-                                
                             </tr>
                             <tr>
                                 @foreach ($kriteria as $item)
@@ -62,5 +61,15 @@
                 
             </div>
         </div>
-    </div>
+    </div> --}}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 me-auto text-start">
+                <h3>Hasil Akhir</h3>
+            </div>
+        </div>
+            <livewire:table-hasil />
+            
+
+      </div>
 @endsection

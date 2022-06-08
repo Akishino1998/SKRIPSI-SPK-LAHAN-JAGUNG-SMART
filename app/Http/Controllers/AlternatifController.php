@@ -221,9 +221,6 @@ class AlternatifController extends AppBaseController
     }
 
     function hasil(){
-        $alternatifs = $this->alternatifRepository->all();
-        $kriteria = Kriteria::all();
-        return view('hasil',compact('kriteria'))
-            ->with('alternatifs', $alternatifs);
+        return view('hasil');
     }
 }
