@@ -28,12 +28,15 @@
         <div class="col-lg-12" wire:loading.remove>
             <div class="row">
                 @foreach ($alternatifs as $alternatif)
-                    <div class="col-lg-3 col-md-4 mb-4">
+                    <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card">
                             <div class="card-body p-3">
-                                <div class="d-flex">
+                                <div class="">
                                     <div class="ms-3 my-auto">
-                                        <h4>{{ $alternatif->Lokasi->lokasi }} - {{ $alternatif->nama_lahan }}</h4>
+                                        <h4>
+                                            {{ $alternatif->Lokasi->lokasi }} - {{ $alternatif->nama_lahan }} 
+                                            <span style="float: right"><a target="_blank" href="{{ route('master.print',[$alternatif->id]) }}" class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i></a></span>
+                                        </h4>
                                     </div>
                                 </div>
                                 <hr class="horizontal dark">

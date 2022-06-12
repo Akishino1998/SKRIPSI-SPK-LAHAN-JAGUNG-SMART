@@ -29,6 +29,7 @@ Route::controller(OrderController::class)->middleware(['auth'])->group(function 
         Route::resource('dataKriterias', App\Http\Controllers\DataKriteriaController::class);
         Route::resource('alternatifs', App\Http\Controllers\AlternatifController::class);
         Route::get('/hasil',[AlternatifController::class,'hasil'])->name('hasil');
+        Route::get('/print/{idAlternatif}',[AlternatifController::class,'print'])->name('print');
 
     });
 });

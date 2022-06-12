@@ -64,7 +64,7 @@
     </div> --}}
     <div class="container">
         <div class="row">
-            <div class="col-md-8 me-auto text-start">
+            <div class="col-md-12 me-auto text-start">
                 <h3>Hasil Akhir</h3>
             </div>
         </div>

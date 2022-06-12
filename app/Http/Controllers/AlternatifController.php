@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Support\Facades\Auth;
 use Response;
+use PDF;
+
 
 class AlternatifController extends AppBaseController
 {
@@ -222,5 +224,29 @@ class AlternatifController extends AppBaseController
 
     function hasil(){
         return view('hasil');
+    }
+    function print($idAlternatif){
+        $alternatif = Alternatif::find($idAlternatif);
+        if (empty($alternatif)) {
+            Flash::error('Alternatif tidak ditemukan.');
+
+            return redirect(route('master.hasil'));
+        }
+        $kriteria = Kriteria::all();
+        return view('print',compact('alternatif','kriteria'));
+    }
+    function printPDF($idAlternatif){
+        $alternatif = Alternatif::find($idAlternatif);
+        if (empty($alternatif)) {
+            Flash::error('Alternatif tidak ditemukan.');
+
+            return redirect(route('master.hasil'));
+        }
+        $kriteria = Kriteria::all();
+        // return view('print',compact('alternatif','kriteria'));
+        $pdf = PDF::loadView('print', compact('alternatif','kriteria'));
+        return $pdf->download('hasil.pdf');
+
+
     }
 }

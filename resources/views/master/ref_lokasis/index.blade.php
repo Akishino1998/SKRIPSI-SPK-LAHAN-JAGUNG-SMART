@@ -1,7 +1,7 @@
 
 @extends('layouts.master')
 @section('konten')
-    <div class="col-sm-6">
+    <div class="col-sm-12">
         <div class="clearfix"></div>
         <div class="card">
             <div class="card-header">
