@@ -12,6 +12,7 @@ class TableHasil extends Component
     public $refLokasi, $nama_lokasi, $lokasi;
     public function mount(){
         $this->refLokasi = RefLokasi::all();
+        $this->lokasi = $this->refLokasi->first()->id;
     }
     public function render()
     {
